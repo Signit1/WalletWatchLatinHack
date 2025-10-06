@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Base styles for dark theme */
+body {
+  background-color: #0B0F14;
+  color: #E6F1FF;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 /* Custom floating dots animations */
 @keyframes float1 {
   0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
