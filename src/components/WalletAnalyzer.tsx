@@ -32,7 +32,7 @@ export function WalletAnalyzer() {
     try {
       const analysis = await analyzeWallet(address)
       setResult(analysis)
-    } catch (err) {
+    } catch {
       setError('Failed to analyze wallet. Please try again.')
     } finally {
       setIsAnalyzing(false)
