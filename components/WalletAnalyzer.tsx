@@ -20,7 +20,6 @@ interface AnalyzeResponse {
 
 export function WalletAnalyzer() {
   const [address, setAddress] = useState('');
-  const [chain, setChain] = useState<'ETH' | 'BTC' | 'DOT'>('ETH');
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<AnalyzeResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -43,7 +42,6 @@ export function WalletAnalyzer() {
         },
         body: JSON.stringify({
           address: address.trim(),
-          chain,
         }),
       });
 
@@ -76,22 +74,6 @@ export function WalletAnalyzer() {
         </h3>
         
         <div className="space-y-4">
-          {/* Chain Selection */}
-          <div>
-            <label className="block text-sm font-medium text-ww-text mb-2">
-              Blockchain
-            </label>
-            <select
-              value={chain}
-              onChange={(e) => setChain(e.target.value as 'ETH' | 'BTC' | 'DOT')}
-              className="w-full px-3 py-2 bg-gray-900 border border-ww-primary/30 rounded-md text-ww-text focus:outline-none focus:ring-2 focus:ring-ww-primary/50"
-            >
-              <option value="ETH">Ethereum (ETH)</option>
-              <option value="BTC">Bitcoin (BTC)</option>
-              <option value="DOT">Polkadot (DOT)</option>
-            </select>
-          </div>
-
           {/* Address Input */}
           <div>
             <label className="block text-sm font-medium text-ww-text mb-2">
@@ -102,15 +84,11 @@ export function WalletAnalyzer() {
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder={
-                chain === 'ETH' ? '0x...' :
-                chain === 'BTC' ? '1... o 3...' :
-                '1...'
-              }
+              placeholder="0x... (ETH) | 1... (BTC) | 1... (DOT) | vitalik.eth (ENS)"
               className="w-full px-3 py-2 bg-gray-900 border border-ww-primary/30 rounded-md text-ww-text placeholder-ww-muted focus:outline-none focus:ring-2 focus:ring-ww-primary/50"
             />
             <p className="text-xs text-ww-muted mt-1">
-              Soporta direcciones {chain} y nombres ENS (para Ethereum)
+              Soporta direcciones ETH, BTC, DOT y nombres ENS. La blockchain se detecta automáticamente.
             </p>
           </div>
 
@@ -157,7 +135,6 @@ export function WalletAnalyzer() {
             <button
               onClick={() => {
                 setAddress('0x8576acc5c05d6ce88f4e49bf65bdf0c62f91353c');
-                setChain('ETH');
               }}
               className="text-ww-primary hover:text-ww-primary/80 underline"
             >
@@ -173,7 +150,6 @@ export function WalletAnalyzer() {
             <button
               onClick={() => {
                 setAddress('test.eth');
-                setChain('ETH');
               }}
               className="text-ww-primary hover:text-ww-primary/80 underline"
             >

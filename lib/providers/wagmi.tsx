@@ -1,47 +1,44 @@
 'use client';
 
 import { createConfig, http } from 'wagmi';
-import { injected, metaMask, walletConnect } from 'wagmi/connectors';
+import { injected, metaMask } from 'wagmi/connectors';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { WagmiProvider } from 'wagmi';
 import { ReactNode } from 'react';
 
-// Configure Paseo chain
-const paseoChain = {
-  id: parseInt(process.env.NEXT_PUBLIC_PASEO_CHAIN_ID || '0'),
-  name: 'Paseo',
+// Simple Ethereum mainnet configuration for demo
+const ethereumChain = {
+  id: 1,
+  name: 'Ethereum',
   nativeCurrency: {
-    name: 'PASEO',
-    symbol: 'PASEO',
+    name: 'Ether',
+    symbol: 'ETH',
     decimals: 18,
   },
   rpcUrls: {
     default: {
-      http: [process.env.NEXT_PUBLIC_PASEO_RPC_URL || ''],
+      http: ['https://eth.llamarpc.com'],
     },
     public: {
-      http: [process.env.NEXT_PUBLIC_PASEO_RPC_URL || ''],
+      http: ['https://eth.llamarpc.com'],
     },
   },
   blockExplorers: {
     default: {
-      name: 'Paseo Explorer',
-      url: process.env.NEXT_PUBLIC_PASEO_RPC_URL?.replace('/rpc', '') || '',
+      name: 'Etherscan',
+      url: 'https://etherscan.io',
     },
   },
 };
 
 export const config = createConfig({
-  chains: [paseoChain],
+  chains: [ethereumChain],
   connectors: [
     injected(),
     metaMask(),
-    walletConnect({
-      projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || '',
-    }),
   ],
   transports: {
-    [paseoChain.id]: http(),
+    [ethereumChain.id]: http(),
   },
 });
 

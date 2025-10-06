@@ -6,8 +6,6 @@ import { nicknameFor } from '@/lib/scoring/nickname';
 
 export interface AnalyzeRequest {
   address: string;
-  chain?: "ETH" | "BTC" | "DOT";
-  ens?: string;
 }
 
 export interface AnalyzeResponse {
@@ -23,6 +21,34 @@ export interface AnalyzeResponse {
     severity: string;
   }>;
   categories: string[];
+}
+
+// Detect blockchain type from address
+function detectBlockchain(address: string): "ETH" | "BTC" | "DOT" {
+  const addr = address.toLowerCase().trim();
+  
+  // ENS names (contain .eth)
+  if (addr.includes('.eth')) {
+    return "ETH";
+  }
+  
+  // Ethereum addresses (start with 0x and are 42 characters)
+  if (addr.startsWith('0x') && addr.length === 42) {
+    return "ETH";
+  }
+  
+  // Bitcoin addresses (start with 1, 3, or bc1)
+  if (addr.startsWith('1') || addr.startsWith('3') || addr.startsWith('bc1')) {
+    return "BTC";
+  }
+  
+  // Polkadot addresses (start with 1 and are longer, or start with specific prefixes)
+  if (addr.startsWith('1') && addr.length > 40) {
+    return "DOT";
+  }
+  
+  // Default to ETH for unknown formats
+  return "ETH";
 }
 
 // Mock ENS resolver (in production, this would call a real ENS resolver)
@@ -41,20 +67,24 @@ function resolveENS(ens: string): string {
 export async function POST(request: NextRequest) {
   try {
     const body: AnalyzeRequest = await request.json();
-    const { address, chain = "ETH", ens } = body;
+    const { address } = body;
 
-    if (!address && !ens) {
+    if (!address) {
       return NextResponse.json(
-        { error: "Address or ENS name is required" },
+        { error: "Address is required" },
         { status: 400 }
       );
     }
 
     let finalAddress = address;
+    let chain: "ETH" | "BTC" | "DOT" = "ETH";
     
-    // Resolve ENS if provided
-    if (ens) {
-      finalAddress = resolveENS(ens);
+    // Detect blockchain type
+    chain = detectBlockchain(address);
+    
+    // Resolve ENS if it's an ENS name
+    if (address.includes('.eth')) {
+      finalAddress = resolveENS(address);
     }
 
     // Perform risk analysis
