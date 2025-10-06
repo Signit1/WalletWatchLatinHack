@@ -68,10 +68,16 @@ export function WalletAnalyzer() {
   return (
     <div className="space-y-6">
       {/* Input Form */}
-      <div className="bg-ww-bg border border-ww-primary/20 rounded-lg p-6">
-        <h3 className="text-xl font-bold text-ww-text mb-4">
-          Analizar Wallet
-        </h3>
+      <div className="bg-ww-bg/80 backdrop-blur-sm border border-ww-primary/30 rounded-lg p-6 relative overflow-hidden animate-slide-up">
+        {/* Futuristic border effect */}
+        <div className="absolute inset-0 bg-gradient-to-r from-ww-primary/10 via-transparent to-ww-secondary/10 rounded-lg opacity-50"></div>
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-ww-primary to-transparent"></div>
+        
+        <div className="relative z-10">
+          <h3 className="text-xl font-bold text-ww-text mb-4 flex items-center">
+            <span className="w-2 h-2 bg-ww-primary rounded-full mr-3 animate-pulse"></span>
+            Analizar Wallet
+          </h3>
         
         <div className="space-y-4">
           {/* Address Input */}
@@ -79,14 +85,17 @@ export function WalletAnalyzer() {
             <label className="block text-sm font-medium text-ww-text mb-2">
               Dirección de Wallet
             </label>
-            <input
-              type="text"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder="0x... (ETH) | 1... (BTC) | 1... (DOT) | vitalik.eth (ENS)"
-              className="w-full px-3 py-2 bg-gray-900 border border-ww-primary/30 rounded-md text-ww-text placeholder-ww-muted focus:outline-none focus:ring-2 focus:ring-ww-primary/50"
-            />
+            <div className="relative">
+              <input
+                type="text"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                onKeyPress={handleKeyPress}
+                placeholder="0x... (ETH) | 1... (BTC) | 1... (DOT) | vitalik.eth (ENS)"
+                className="w-full px-3 py-2 bg-gray-900/50 backdrop-blur-sm border border-ww-primary/30 rounded-md text-ww-text placeholder-ww-muted focus:outline-none focus:ring-2 focus:ring-ww-primary/50 focus:border-ww-primary/60 transition-all duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-ww-primary/5 to-ww-secondary/5 rounded-md opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+            </div>
             <p className="text-xs text-ww-muted mt-1">
               Soporta direcciones ETH, BTC, DOT y nombres ENS. La blockchain se detecta automáticamente.
             </p>
@@ -96,9 +105,22 @@ export function WalletAnalyzer() {
           <button
             onClick={handleAnalyze}
             disabled={loading || !address.trim()}
-            className="w-full bg-ww-primary hover:bg-ww-primary/80 disabled:bg-gray-600 disabled:cursor-not-allowed text-black font-semibold py-3 px-4 rounded-md transition-colors"
+            className="w-full relative bg-gradient-to-r from-ww-primary to-ww-secondary hover:from-ww-primary/80 hover:to-ww-secondary/80 disabled:from-gray-600 disabled:to-gray-600 disabled:cursor-not-allowed text-black font-semibold py-3 px-4 rounded-md transition-all duration-300 transform hover:scale-105 disabled:hover:scale-100 shadow-lg hover:shadow-ww-primary/25"
           >
-            {loading ? 'Analizando...' : 'Analizar con WalletWatch'}
+            <div className="absolute inset-0 bg-gradient-to-r from-ww-primary/20 to-ww-secondary/20 rounded-md opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+            <span className="relative z-10 flex items-center justify-center">
+              {loading ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin mr-2"></div>
+                  Analizando...
+                </>
+              ) : (
+                <>
+                  <span className="w-2 h-2 bg-black rounded-full mr-2 animate-pulse"></span>
+                  Analizar con WalletWatch
+                </>
+              )}
+            </span>
           </button>
         </div>
 
@@ -124,43 +146,6 @@ export function WalletAnalyzer() {
         />
       )}
 
-      {/* Example Addresses */}
-      <div className="bg-ww-bg border border-ww-primary/20 rounded-lg p-6">
-        <h4 className="text-lg font-semibold text-ww-text mb-3">
-          Direcciones de Prueba
-        </h4>
-        <div className="space-y-2 text-sm">
-          <div className="flex items-center justify-between">
-            <span className="text-ww-muted">Wallet sancionada (OFAC):</span>
-            <button
-              onClick={() => {
-                setAddress('0x8576acc5c05d6ce88f4e49bf65bdf0c62f91353c');
-              }}
-              className="text-ww-primary hover:text-ww-primary/80 underline"
-            >
-              Copiar
-            </button>
-          </div>
-          <div className="text-xs text-ww-muted font-mono break-all">
-            0x8576acc5c05d6ce88f4e49bf65bdf0c62f91353c
-          </div>
-          
-          <div className="flex items-center justify-between mt-3">
-            <span className="text-ww-muted">ENS de prueba:</span>
-            <button
-              onClick={() => {
-                setAddress('test.eth');
-              }}
-              className="text-ww-primary hover:text-ww-primary/80 underline"
-            >
-              Copiar
-            </button>
-          </div>
-          <div className="text-xs text-ww-muted font-mono">
-            test.eth
-          </div>
-        </div>
-      </div>
     </div>
   );
 }

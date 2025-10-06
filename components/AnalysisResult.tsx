@@ -45,21 +45,29 @@ export function AnalysisResult({
   };
 
   return (
-    <div className="bg-ww-bg border border-ww-primary/20 rounded-lg p-6 space-y-6">
+    <div className="bg-ww-bg/80 backdrop-blur-sm border border-ww-primary/30 rounded-lg p-6 space-y-6 relative overflow-hidden animate-slide-up">
+      {/* Futuristic background effects */}
+      <div className="absolute inset-0 bg-gradient-to-br from-ww-primary/5 via-transparent to-ww-secondary/5 rounded-lg"></div>
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-ww-primary to-transparent"></div>
+      <div className="absolute bottom-0 right-0 w-full h-px bg-gradient-to-l from-transparent via-ww-secondary to-transparent"></div>
       {/* Header with Traffic Light */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between relative z-10">
         <div className="flex items-center space-x-4">
           <TrafficLight status={getTrafficStatus()} />
           <div>
-            <h3 className="text-xl font-bold text-ww-text">Análisis Completado</h3>
-            <p className="text-ww-muted text-sm">
+            <h3 className="text-xl font-bold text-ww-text flex items-center">
+              <span className="w-2 h-2 bg-ww-green rounded-full mr-3 animate-pulse"></span>
+              Análisis Completado
+            </h3>
+            <p className="text-ww-muted text-sm font-mono">
               {address} ({chain})
             </p>
           </div>
         </div>
         <div className="text-right">
-          <div className={`text-3xl font-bold ${getStatusColor()}`}>
-            {score.toFixed(1)}
+          <div className={`text-3xl font-bold ${getStatusColor()} relative`}>
+            <div className="absolute inset-0 bg-gradient-to-r from-current/20 to-transparent rounded blur-sm"></div>
+            <span className="relative z-10">{score.toFixed(1)}</span>
           </div>
           <div className="text-ww-muted text-sm">Score</div>
         </div>
