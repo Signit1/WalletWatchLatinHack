@@ -1,0 +1,17 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="32" cy="32" r="30" fill="#0B0F14" stroke="#00F5FF" stroke-width="2"/>
+  
+  <!-- WW Monogram -->
+  <text x="32" y="40" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#00F5FF">WW</text>
+  
+  <!-- Traffic Light Dots -->
+  <!-- Green dot (top) -->
+  <circle cx="32" cy="16" r="3" fill="#22C55E"/>
+  
+  <!-- Yellow dot (middle) -->
+  <circle cx="32" cy="22" r="3" fill="#EAB308"/>
+  
+  <!-- Red dot (bottom) -->
+  <circle cx="32" cy="28" r="3" fill="#EF4444"/>
+</svg>
