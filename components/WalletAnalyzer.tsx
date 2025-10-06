@@ -130,6 +130,7 @@ export function WalletAnalyzer() {
             <p className="text-ww-red text-sm">{error}</p>
           </div>
         )}
+        </div>
       </div>
 
       {/* Results */}
