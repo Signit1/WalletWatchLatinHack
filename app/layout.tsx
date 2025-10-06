@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="es" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-ww-bg text-ww-text relative overflow-x-hidden`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-900 text-white relative overflow-x-hidden`}
       >
         {/* Simple Background Effects */}
         <div className="fixed inset-0 -z-10">
