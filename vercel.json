@@ -1,0 +1,21 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "functions": {
+    "app/api/**/*.ts": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "env": {
+    "FF_PUBLIC_SANCTIONS": "true",
+    "FF_CHAINALYSIS": "false",
+    "FF_ELLIPTIC": "false",
+    "FF_FIREBLOCKS": "false",
+    "FF_TETHER": "false",
+    "FF_CIRCLE": "false",
+    "FF_TALENT_PROTOCOL": "false",
+    "FF_ALCHEMY": "false"
+  }
+}
