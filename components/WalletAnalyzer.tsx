@@ -68,35 +68,27 @@ export function WalletAnalyzer() {
   return (
     <div className="space-y-6">
       {/* Input Form */}
-      <div className="bg-ww-bg/80 backdrop-blur-sm border border-ww-primary/30 rounded-lg p-6 relative overflow-hidden animate-slide-up">
-        {/* Futuristic border effect */}
-        <div className="absolute inset-0 bg-gradient-to-r from-ww-primary/10 via-transparent to-ww-secondary/10 rounded-lg opacity-50"></div>
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-ww-primary to-transparent"></div>
-        
-        <div className="relative z-10">
-          <h3 className="text-xl font-bold text-ww-text mb-4 flex items-center">
-            <span className="w-2 h-2 bg-ww-primary rounded-full mr-3 animate-pulse"></span>
-            Analizar Wallet
-          </h3>
+      <div className="bg-gray-900/80 border border-cyan-400/30 rounded-lg p-6">
+        <h3 className="text-xl font-bold text-white mb-4 flex items-center">
+          <span className="w-2 h-2 bg-cyan-400 rounded-full mr-3 animate-pulse"></span>
+          Analizar Wallet
+        </h3>
         
         <div className="space-y-4">
           {/* Address Input */}
           <div>
-            <label className="block text-sm font-medium text-ww-text mb-2">
+            <label className="block text-sm font-medium text-white mb-2">
               Dirección de Wallet
             </label>
-            <div className="relative">
-              <input
-                type="text"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                onKeyPress={handleKeyPress}
-                placeholder="0x... (ETH) | 1... (BTC) | 1... (DOT) | vitalik.eth (ENS)"
-                className="w-full px-3 py-2 bg-gray-900/50 backdrop-blur-sm border border-ww-primary/30 rounded-md text-ww-text placeholder-ww-muted focus:outline-none focus:ring-2 focus:ring-ww-primary/50 focus:border-ww-primary/60 transition-all duration-300"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-ww-primary/5 to-ww-secondary/5 rounded-md opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-            </div>
-            <p className="text-xs text-ww-muted mt-1">
+            <input
+              type="text"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              onKeyPress={handleKeyPress}
+              placeholder="0x... (ETH) | 1... (BTC) | 1... (DOT) | vitalik.eth (ENS)"
+              className="w-full px-3 py-2 bg-gray-800 border border-cyan-400/30 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/50 focus:border-cyan-400/60 transition-all duration-300"
+            />
+            <p className="text-xs text-gray-400 mt-1">
               Soporta direcciones ETH, BTC, DOT y nombres ENS. La blockchain se detecta automáticamente.
             </p>
           </div>
@@ -105,32 +97,28 @@ export function WalletAnalyzer() {
           <button
             onClick={handleAnalyze}
             disabled={loading || !address.trim()}
-            className="w-full relative bg-gradient-to-r from-ww-primary to-ww-secondary hover:from-ww-primary/80 hover:to-ww-secondary/80 disabled:from-gray-600 disabled:to-gray-600 disabled:cursor-not-allowed text-black font-semibold py-3 px-4 rounded-md transition-all duration-300 transform hover:scale-105 disabled:hover:scale-100 shadow-lg hover:shadow-ww-primary/25"
+            className="w-full bg-gradient-to-r from-cyan-400 to-purple-500 hover:from-cyan-400/80 hover:to-purple-500/80 disabled:from-gray-600 disabled:to-gray-600 disabled:cursor-not-allowed text-black font-semibold py-3 px-4 rounded-md transition-all duration-300 transform hover:scale-105 disabled:hover:scale-100"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-ww-primary/20 to-ww-secondary/20 rounded-md opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
-            <span className="relative z-10 flex items-center justify-center">
-              {loading ? (
-                <>
-                  <div className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin mr-2"></div>
-                  Analizando...
-                </>
-              ) : (
-                <>
-                  <span className="w-2 h-2 bg-black rounded-full mr-2 animate-pulse"></span>
-                  Analizar con WalletWatch
-                </>
-              )}
-            </span>
+            {loading ? (
+              <>
+                <div className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin mr-2 inline-block"></div>
+                Analizando...
+              </>
+            ) : (
+              <>
+                <span className="w-2 h-2 bg-black rounded-full mr-2 animate-pulse inline-block"></span>
+                Analizar con WalletWatch
+              </>
+            )}
           </button>
         </div>
 
         {/* Error Display */}
         {error && (
-          <div className="mt-4 p-3 bg-ww-red/10 border border-ww-red/30 rounded-md">
-            <p className="text-ww-red text-sm">{error}</p>
+          <div className="mt-4 p-3 bg-red-500/10 border border-red-500/30 rounded-md">
+            <p className="text-red-400 text-sm">{error}</p>
           </div>
         )}
-        </div>
       </div>
 
       {/* Results */}
@@ -146,7 +134,6 @@ export function WalletAnalyzer() {
           categories={result.categories}
         />
       )}
-
     </div>
   );
 }
