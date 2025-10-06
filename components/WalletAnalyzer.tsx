@@ -66,18 +66,22 @@ export function WalletAnalyzer() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Input Form */}
-      <div className="bg-gray-900/80 border border-cyan-400/30 rounded-lg p-6">
-        <h3 className="text-xl font-bold text-white mb-4 flex items-center">
-          <span className="w-2 h-2 bg-cyan-400 rounded-full mr-3 animate-pulse"></span>
-          Analizar Wallet
-        </h3>
+      <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-600 rounded-xl p-8 shadow-xl">
+        <div className="text-center mb-6">
+          <h3 className="text-2xl font-bold text-white mb-2">
+            Analizar Wallet
+          </h3>
+          <p className="text-gray-400">
+            Ingresa una dirección para obtener un análisis completo de riesgo
+          </p>
+        </div>
         
-        <div className="space-y-4">
+        <div className="space-y-6">
           {/* Address Input */}
           <div>
-            <label className="block text-sm font-medium text-white mb-2">
+            <label className="block text-sm font-medium text-gray-300 mb-3">
               Dirección de Wallet
             </label>
             <input
@@ -86,9 +90,9 @@ export function WalletAnalyzer() {
               onChange={(e) => setAddress(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="0x... (ETH) | 1... (BTC) | 1... (DOT) | vitalik.eth (ENS)"
-              className="w-full px-3 py-2 bg-gray-800 border border-cyan-400/30 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/50 focus:border-cyan-400/60 transition-all duration-300"
+              className="w-full px-4 py-3 bg-gray-900/50 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-400/50 focus:border-cyan-400 transition-all duration-300 text-lg"
             />
-            <p className="text-xs text-gray-400 mt-1">
+            <p className="text-xs text-gray-500 mt-2">
               Soporta direcciones ETH, BTC, DOT y nombres ENS. La blockchain se detecta automáticamente.
             </p>
           </div>
@@ -97,25 +101,25 @@ export function WalletAnalyzer() {
           <button
             onClick={handleAnalyze}
             disabled={loading || !address.trim()}
-            className="w-full bg-gradient-to-r from-cyan-400 to-purple-500 hover:from-cyan-400/80 hover:to-purple-500/80 disabled:from-gray-600 disabled:to-gray-600 disabled:cursor-not-allowed text-black font-semibold py-3 px-4 rounded-md transition-all duration-300 transform hover:scale-105 disabled:hover:scale-100"
+            className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed text-white font-semibold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 disabled:hover:scale-100 shadow-lg hover:shadow-cyan-500/25 text-lg"
           >
             {loading ? (
-              <>
-                <div className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin mr-2 inline-block"></div>
+              <div className="flex items-center justify-center">
+                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-3"></div>
                 Analizando...
-              </>
+              </div>
             ) : (
-              <>
-                <span className="w-2 h-2 bg-black rounded-full mr-2 animate-pulse inline-block"></span>
+              <div className="flex items-center justify-center">
+                <span className="w-2 h-2 bg-white rounded-full mr-3 animate-pulse"></span>
                 Analizar con WalletWatch
-              </>
+              </div>
             )}
           </button>
         </div>
 
         {/* Error Display */}
         {error && (
-          <div className="mt-4 p-3 bg-red-500/10 border border-red-500/30 rounded-md">
+          <div className="mt-6 p-4 bg-red-500/10 border border-red-500/30 rounded-lg">
             <p className="text-red-400 text-sm">{error}</p>
           </div>
         )}
